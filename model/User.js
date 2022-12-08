@@ -9,16 +9,18 @@ const db = client.db(dbName);
 const usersColl = db.collection('Users');
 
 const User = {
-    getByLoginPwd : async function(login, pwd){
-        return await usersColl.find({login: login, mdp: pwd}).toArray();
+    getByLoginPwd : async function(log, pass){
+        await client.connect()
+        return await usersColl.find({login: log, pwd: pass}).toArray();
     },
 
     getAll : async function(){
+        await client.connect()
         return await usersColl.find().toArray();
     },
 
     insert : async function(login, pwd, name, surname){
-        usersColl.insertOne({_id: new ObjectID, login: new Object(login), mdp: new Object(pwd), name : new Object(name), surname: new Object(surname)})
+        usersColl.insertOne({_id: new ObjectID, login: new Object(login), pwd: new Object(pwd), name : new Object(name), surname: new Object(surname)})
             .then(
                 res => {
                     console.log(`User '${name}' '${surname}' created`);

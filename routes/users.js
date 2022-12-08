@@ -10,12 +10,8 @@ router.get('/', function(req, res) {
 
 router.post('/', async function(req, res) {
 
-    // Utilisateur fake ici
-    // TODO : aller chercher l'utilisateur en base de données à partir du login et du (hash du) mot de passe
-
-    let usrs = users.getByLoginPwd(req.body.login, req.body.password);
-    console.log(usrs)
-    req.session.user = { firstname : "Jean", lastname : "Dupond"};
+    let usr = await users.getByLoginPwd(req.body.login, req.body.password);
+    req.session.user = { firstname : usr[0].name, lastname : usr[0].surname};
     res.redirect("/home");
 });
 

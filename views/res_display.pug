@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    each ressource in res_array
+        p Ressource : #{ressource.name}
+        p Suivant l'architecture #{ressource.architecture}
+        hr
+
+    form(method='POST' action='/ressource/search')
+        div.form-group
+            label(for='name') Nom de la ressource:
+            input#name.form-control(type='text' name='name' required='true')
+
+        btn.btn.btn-primary(type='submit') Nouvelle recherche
+    br
+    form.form-inline(method='GET' action='/home')
+        button.btn.btn-primary(type='submit') Retour à l'accueil

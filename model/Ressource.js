@@ -11,7 +11,7 @@ const resColl = db.collection('Ressources');
 const Ressource = {
     getResByName: async function(name){
         await client.connect();
-        return await resColl.findOne({name: name});
+        return await resColl.find({name: name}).toArray();
     },
 
     getAllRes: async function(){
@@ -21,7 +21,7 @@ const Ressource = {
 
     insert: async function(n, t){
         await client.connect();
-        return await resColl.insertOne({_id: new ObjectID, name: n, type: t})
+        return await resColl.insertOne({_id: new ObjectID, name: n, architecture: t})
     }
 }
 

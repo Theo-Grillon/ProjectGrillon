@@ -8,3 +8,13 @@ block content
         else
             p Administrateur: Non
         br
+    hr
+    form(method='POST' action='/user/display')
+        div.form-group
+            label(for='login') Identifiant:
+            input#login.form-control(type='text' name='login' required='true')
+
+        btn.btn.btn-primary(type='submit') Nouvelle recherche
+    br
+    form.form-inline(method='GET' action='/home')
+        button.btn.btn-primary(type='submit') Retour à l'accueil.

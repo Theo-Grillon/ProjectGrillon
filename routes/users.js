@@ -21,8 +21,17 @@ router.post('/login', async function(req, res) {
     }
 });
 
+router.post('/search', async function(req, res){
+    res.render("usr_display", {title: "Recherche d'utilisateur:", user: req.session.user, usr_array: []})
+})
+
 router.post('/display', async function(req, res){
-    res.render("usr_display", {title: "Résultat de la recherche:", user: req.session.user, usr_array: await users.getByLogin(req.body.log)});
+    if(req.body.login==="All"){
+        res.render("usr_display", {title: "Résultat de la recherche:", user: req.session.user, usr_array: await users.getAll()});
+    }
+    else{
+        res.render("usr_display", {title: "Résultat de la recherche:", user: req.session.user, usr_array: await users.getByLogin(req.body.login)});
+    }
 })
 
 module.exports = router;

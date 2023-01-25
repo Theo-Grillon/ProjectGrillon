@@ -8,5 +8,6 @@ block content
         p Ressources réservées:
         each ressource in reservation.ressources
             p #{ressource}
+        hr
     form.form-inline(method='GET' action='/home')
         button.btn.btn-primary(type='submit') Retour à l'accueil

@@ -23,10 +23,10 @@ html(lang='en')
                 form.form-inline(method='POST' action="/reservation/display")
                     button(class="btn btn-secondary" type="submit") Consulter les réservations
                 br
-                form.form-inline(method='POST' action='ressource/display')
+                form.form-inline(method='POST' action='/ressource/display')
                     button(class="btn btn-secondary" type="submit") Ressources disponibles
                 br
-                form.form-inline(method='POST' action='user/search')
+                form.form-inline(method='POST' action='/user/search')
                     button(class="btn btn-secondary" type="submit") Rechercher un utilisateur.
                 br
                 if (user.is_admin)

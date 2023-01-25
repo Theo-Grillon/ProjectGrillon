@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    each usr in usr_array
+        p #{usr.login} |
+        if usr.is_admin
+            p Administrateur: Oui
+        else
+            p Administrateur: Non
+        br

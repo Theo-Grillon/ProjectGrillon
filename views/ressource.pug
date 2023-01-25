@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    form(method='POST' action="/ressource/created")
+        div.form-group
+            label(for='name') Nom:
+            input#name.form-control(type='text' name='name' required='true')
+
+        div.form-group
+            label(for='type') Type:
+            input#type.form-control(type='text' name='type' required='true')
+
+        button(class="btn.btn-primary" type='submit') Créer
+    form.form-inline(method='GET' action='/home')
+        button(class="btn btn-primary" type="submit") Retour

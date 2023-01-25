@@ -14,13 +14,28 @@ const User = {
         return await usersColl.find({login: log, pwd: pass}).toArray();
     },
 
+    getByLogin: async function(log){
+        await client.connect()
+        return await usersColl.find({login: log}).toArray();
+    },
+
+    getByNameSurname: async function(firstname, lastname){
+        await client.connect();
+        return await usersColl.findOne({name: firstname, surname: lastname});
+    },
+
     getAll : async function(){
         await client.connect()
         return await usersColl.find().toArray();
     },
 
-    insert : async function(login, pwd, name, surname){
-        usersColl.insertOne({_id: new ObjectID, login: new Object(login), pwd: new Object(pwd), name : new Object(name), surname: new Object(surname)})
+    addReservation: async function(user_login){
+      await client.connect();
+      await usersColl.updateOne({login: user_login}, {$inc: {nb_resa: 1}});
+    },
+
+    insert : async function(log, pwd, n, s, adm){
+        usersColl.insertOne({_id: new ObjectID, login: log, pwd: pwd, name : n, surname: s, is_admin: adm})
             .then(
                 res => {
                     console.log(`User '${name}' '${surname}' created`);

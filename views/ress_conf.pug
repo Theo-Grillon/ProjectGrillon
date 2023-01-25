@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    p Ressource #{name} créée. Elle est de type #{type}.
+    br
+    form.form-inline(method='POST' action='/ressource')
+        button.btn.btn-primary(type='submit') Créer une autre ressource
+    br
+    form.form-inline(method='POST' action='../reservation')
+        button.btn.btn-primary(type='submit') Réservation

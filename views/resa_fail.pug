@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    p Désolé, les ressources suivantes sont déjà réservées pour la période demandée:
+    br
+    each res in res_array
+        p - #{res}
+        br
+
+    form.form-inline(method='POST' action='/reservation')
+        button.btn.btn-primary(type='submit') Retour

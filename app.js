@@ -7,7 +7,9 @@ const session = require("express-session");
 const app = express();
 const port = process.env.PORT;
 
-const userRouter = require(path.join(__dirname, "routes/users.js"))
+const userRouter = require(path.join(__dirname, "routes/users.js"));
+const resaRouter = require(path.join(__dirname, "routes/reservations.js"));
+const resRouter = require(path.join(__dirname, "routes/ressources.js"));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,12 +40,12 @@ app.get('/', function(req, res) {
         res.redirect("/home");
     }
     else{
-        res.redirect("/login");
+        res.redirect("/user/login");
     }
 
 });
 
-app.use("/login", userRouter);
+app.use("/user", userRouter);
 
 app.get('/home', auth, function(req, res) {
     res.render("layout", {title: "Page d'accueil", user : req.session.user});
@@ -52,8 +54,11 @@ app.get('/home', auth, function(req, res) {
 app.post('/logout', function(req, res) {
 
     req.session.destroy();
-    res.redirect("/login");
+    res.redirect("/user/login");
 });
+
+app.use("/reservation", resaRouter);
+app.use("/ressource", resRouter);
 
 // server start
 app.listen(port, () => {

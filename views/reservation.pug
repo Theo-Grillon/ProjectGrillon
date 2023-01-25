@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    form(method='POST' action="/reservation/reserved")
+        div.form-group
+            label(for='start') De:
+            input#start.form-control(type='date' name='start' required='true')
+
+        div.form-group
+            label(for='end') À:
+            input#end.form-control(type='date' name='end' required='true')
+
+        div.form-group
+            each res, index in res_array
+                div.checkbox-inline
+                    input.checkbox-input(type='checkbox', name=`res[${index}]`, value=res.name, id=`create-shift-${res}`)
+                    label(for=`create-shift-${res}`)=res.name
+
+        fieldset
+            legend Owner:
+            label(for='fname') Prenom:
+            input#fname(type='text' name='fname' value=owner.firstname)
+            label(for='lname') Prenom:
+            input#lname(type='text' name='lname' value=owner.lastname)
+
+        button(class="btn.btn-primary" type='submit') Réserver
+    form.form-inline(method='GET' action='/home')
+        button(class="btn btn-primary" type="submit") Retour

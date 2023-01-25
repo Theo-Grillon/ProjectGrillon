@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    p Votre réservation est confirmée !
+    p Vous avez réservé #{nb_res} ressources pour une durée de #{days} jours.
+
+    form.form-inline(method='POST' action="/reservation")
+        button(class="btn btn-primary" type="submit") Nouvelle réservation.
+
+    form.form-inline(method='GET' action="/home")
+        button(class="btn btn-primary" type="submit") Retour à l'accueil.

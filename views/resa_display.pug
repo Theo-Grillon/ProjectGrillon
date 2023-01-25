@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    each reservation in resa_array
+        p Réservation par : #{reservation.owner}
+        Date Du : #{reservation.start_date}
+        Date Au : #{reservation.end_date}
+        p Ressources réservées:
+        each ressource in reservation.ressources
+            p #{ressource}
+    form.form-inline(method='GET' action='/home')
+        button.btn.btn-primary(type='submit') Retour à l'accueil

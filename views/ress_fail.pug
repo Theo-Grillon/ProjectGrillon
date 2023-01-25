@@ -1,0 +1,7 @@
+extends layout
+
+block content
+    p Désolé, il semble que la ressource #{name} que vous essayez de créer existe déjà. Essayez de changer de nom.
+
+    form.form-inline(method='POST' action='/ressource')
+        button.btn.btn-primary(type='submit') Retour

@@ -29,7 +29,7 @@ html(lang='en')
                 form.form-inline(method='POST' action='/user/search')
                     button(class="btn btn-secondary" type="submit") Rechercher un utilisateur.
                 br
-                if (user.is_admin)
+                if user.is_admin
                     div
                         form.form-inline(method='POST' action="/ressource")
                             button(class="btn btn-secondary" type="submit") Ajouter une ressource

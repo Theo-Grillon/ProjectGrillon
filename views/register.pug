@@ -1,7 +1,7 @@
 extends login
 
 block content
-    form(method='POST' action='')
+    form(method='POST' action='/user/new')
         div.form-group
             label(for='login') Identifiant:
             input#login.form-control(type='text' name='login' required='true')
@@ -16,6 +16,6 @@ block content
 
         div.form-group
             label(for='surname') Nom:
-            input#surname.form-control(type='text' name='name' required='true')
+            input#surname.form-control(type='text' name='surname' required='true')
 
         button.btn.btn-primary(type='submit') S'inscrire

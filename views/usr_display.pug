@@ -2,7 +2,7 @@ extends layout
 
 block content
     each usr in usr_array
-        p #{usr.login} |
+        p #{usr.login} | Nombre de réservations effectuées: #{usr.nb_resa}
         if usr.is_admin
             p Administrateur: Oui
         else
@@ -13,8 +13,16 @@ block content
         div.form-group
             label(for='login') Identifiant:
             input#login.form-control(type='text' name='login' required='true')
-
-        btn.btn.btn-primary(type='submit') Nouvelle recherche
+        if user.is_admin
+            fieldset
+                legend Rendre administrateur:
+                label(for='admin') Oui
+                input#admin(type='radio', name='is_admin', value="true")
+                label(for='not_admin') Non
+                input#not_admin(type='radio', name='is_admin', value="false")
+                button.btn(type='submit') Valider
+        br
+        button.btn.btn-primary(type='submit') Nouvelle recherche
     br
     form.form-inline(method='GET' action='/home')
         button.btn.btn-primary(type='submit') Retour à l'accueil.

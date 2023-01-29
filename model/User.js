@@ -29,16 +29,21 @@ const User = {
         return await usersColl.find().toArray();
     },
 
+    makeAdmin: async function(log, adm_status){
+        await client.connect();
+        await usersColl.updateOne({login: log}, {$set: {is_admin: adm_status}});
+    },
+
     addReservation: async function(user_login){
       await client.connect();
       await usersColl.updateOne({login: user_login}, {$inc: {nb_resa: 1}});
     },
 
     insert : async function(log, pwd, n, s, adm){
-        usersColl.insertOne({_id: new ObjectID, login: log, pwd: pwd, name : n, surname: s, is_admin: adm})
+        usersColl.insertOne({_id: new ObjectID, login: log, pwd: pwd, name : n, surname: s, nb_resa: 0, is_admin: adm})
             .then(
                 res => {
-                    console.log(`User '${name}' '${surname}' created`);
+                    console.log(`User ${n} ${s} created`);
                 }
             )
     }

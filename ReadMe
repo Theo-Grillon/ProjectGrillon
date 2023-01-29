@@ -1,6 +1,12 @@
 URL de déploiement:
 Login BDD: Alpha
-Mdp BDD: Root
-Login par défaut: J_Dpd
-Mdp par défaut: hashed_pwd
-Donne Jean Dupond
+Mdp BDD: Lambda
+
+Utilisateur par défaut:
+    Login: J_Dpd
+    Mdp: hashed_mdp
+    Donne Jean Dupond
+Utilisateur administrateur:
+    Login: Adm
+    Mdp: hashed_adm_pwd
+    Donne Big Boss

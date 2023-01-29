@@ -1,7 +1,9 @@
 extends layout
-
+//Page d'affichage et recherche des utilisateurs
 block content
+    //Pour chaque utilisateur demandé
     each usr in usr_array
+        //Afficher leur pseudo, le nombre de réservation et s'ils sont administrateurs
         p #{usr.login} | Nombre de réservations effectuées: #{usr.nb_resa}
         if usr.is_admin
             p Administrateur: Oui
@@ -9,10 +11,13 @@ block content
             p Administrateur: Non
         br
     hr
+    //Formulaire de recherche d'utilisateur
     form(method='POST' action='/user/display')
+        //Recherche par identifiant
         div.form-group
             label(for='login') Identifiant:
             input#login.form-control(type='text' name='login' required='true')
+        //Si la personne connectée est administrateur, possibilité de modifier les privilèges de la personne indiquée dans le champs de recherche
         if user.is_admin
             fieldset
                 legend Rendre administrateur:
@@ -20,9 +25,11 @@ block content
                 input#admin(type='radio', name='is_admin', value="true")
                 label(for='not_admin') Non
                 input#not_admin(type='radio', name='is_admin', value="false")
+                //Un autre bouton de validation est bien sûr utilisé pour séparer les modifications de droits de la recherche simple
                 button.btn(type='submit') Valider
         br
         button.btn.btn-primary(type='submit') Nouvelle recherche
     br
+    //Pour revenir à l'accueil directement
     form.form-inline(method='GET' action='/home')
         button.btn.btn-primary(type='submit') Retour à l'accueil.

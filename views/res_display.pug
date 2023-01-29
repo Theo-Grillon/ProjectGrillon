@@ -1,11 +1,13 @@
 extends layout
-
+//Page d'affichage et recherche des ressources
 block content
+    //Pour chaque ressource données lors de l'appel à la page,
     each ressource in res_array
+        //afficher le nom puis l'architecture
         p Ressource : #{ressource.name}
         p Suivant l'architecture #{ressource.architecture}
         hr
-
+    //formulaire de recherche de ressource
     form(method='POST' action='/ressource/search')
         div.form-group
             label(for='name') Nom de la ressource:
@@ -13,5 +15,6 @@ block content
 
         btn.btn.btn-primary(type='submit') Nouvelle recherche
     br
+    //Pour revenir à l'accueil
     form.form-inline(method='GET' action='/home')
         button.btn.btn-primary(type='submit') Retour à l'accueil

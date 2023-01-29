@@ -1,8 +1,7 @@
 require('dotenv').config()
-const { MongoClient, ObjectID} = require('mongodb');
 
-const path = require('path');
-const args = process.argv.slice(2);
+//Récupération des informations de BDD et connection
+const { MongoClient, ObjectID} = require('mongodb');
 const url = process.env.MONGODB_URI;
 const dbName = "Project_DB";
 const client = new MongoClient(url);
@@ -10,26 +9,24 @@ const db = client.db(dbName);
 const resaColl = db.collection('Reservations');
 const userColl = db.collection('Users');
 
-const ress = require(path.join(__dirname, "Ressource.js"))
-
 const Reservation = {
-    getResaByOwner: async function(owner){
+    getResaByOwner: async function(owner){ // Donne toutes les réservations d'un utilisateur donné, pour le moment inutilisé
         await client.connect();
         let usr = await userColl.find({surname: owner}).toArray();
         return await resaColl.find({owner: usr[0]._id}).toArray();
     },
 
-    getResaByRessources: async function(ress){
+    getResaByRessources: async function(ress){ // Donne toutes les réservations utilisant une ressource donnée
         await client.connect();
         return await resaColl.find({ressources: ress}).toArray();
     },
 
-    getAll: async function(){
+    getAll: async function(){ // Donne toutes les réservations
         await client.connect();
         return await resaColl.find().toArray();
     },
 
-    insert: async function(start, end, ressources, owner){
+    insert: async function(start, end, ressources, owner){ // Ajoute une réservation à la BDD
         await client.connect();
         resaColl.insertOne({
             _id: new ObjectID,

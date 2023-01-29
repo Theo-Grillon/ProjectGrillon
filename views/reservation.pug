@@ -1,21 +1,23 @@
 extends layout
-
+//Page de réservation
 block content
+    //Formulaire de réservation, avec toutes les informations nécessaires
     form(method='POST' action="/reservation/reserved")
+        //Date de début
         div.form-group
             label(for='start') De:
             input#start.form-control(type='date' name='start' required='true')
-
+        //de fin
         div.form-group
             label(for='end') À:
             input#end.form-control(type='date' name='end' required='true')
-
+        //Ressources existantes, afin de pouvoir sélectionner celles à réserver
         div.form-group
             each res, index in res_array
                 div.checkbox-inline
                     input.checkbox-input(type='checkbox', name=`res[${index}]`, value=res.name, id=`create-shift-${res}`)
                     label(for=`create-shift-${res}`)=res.name
-
+        //Champs permettant de renseigner les informations sur l'utilisateur à l'origine de la réservation
         fieldset
             legend Owner:
             label(for='fname') Prenom:
@@ -25,5 +27,6 @@ block content
 
         button(class="btn btn-primary" type='submit') Réserver
     br
+    //Pour revenir en arrière sans réserver
     form.form-inline(method='GET' action='/home')
         button(class="btn btn-secondary" type="submit") Retour

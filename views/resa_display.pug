@@ -1,7 +1,9 @@
 extends layout
-
+//Page d'affichage des réservations
 block content
+    //Pour chaque réservation donnée lors de l'appel
     each reservation in resa_array
+        //afficher leur détail
         p Réservation par : #{reservation.owner}
         Date Du : #{reservation.start_date}
         Date Au : #{reservation.end_date}
@@ -9,5 +11,6 @@ block content
         each ressource in reservation.ressources
             p #{ressource}
         hr
+    //Pour revenir à l'accueil
     form.form-inline(method='GET' action='/home')
         button.btn.btn-primary(type='submit') Retour à l'accueil

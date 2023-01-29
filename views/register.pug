@@ -1,6 +1,7 @@
 extends login
-
+//Page d'inscription
 block content
+    //Formulaire associé
     form(method='POST' action='/user/new')
         div.form-group
             label(for='login') Identifiant:
@@ -17,5 +18,5 @@ block content
         div.form-group
             label(for='surname') Nom:
             input#surname.form-control(type='text' name='surname' required='true')
-
+        //Pas de possibilité de créer un utilisateur administrateur directement, pour cela il faudra demander à un autre administrateur de le faire
         button.btn.btn-primary(type='submit') S'inscrire

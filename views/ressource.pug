@@ -1,6 +1,7 @@
 extends layout
-
+//Page de création de ressource
 block content
+    //Formulaire de création
     form(method='POST' action="/ressource/created")
         div.form-group
             label(for='name') Nom:
@@ -12,5 +13,6 @@ block content
 
         button(class="btn btn-primary" type='submit') Créer
     br
+    //Pour revenir en arrière sans créer de ressource
     form.form-inline(method='GET' action='/home')
         button(class="btn btn-secondary" type="submit") Retour

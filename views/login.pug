@@ -1,6 +1,7 @@
 extends layout
-
+//Page de connexion
 block content
+  //formulaire de connexion
   form(method='POST' action='')
     div.form-group
       label(for='login') Identifiant:
@@ -11,6 +12,7 @@ block content
       input#password.form-control(type='password' name='password' required='true')
 
     button.btn.btn-primary(type='submit') Se connecter
+  //Possibilité d'inscrire un nouvel utilisateur
   form.form-inline(method='POST' action='/user/register')
     p Pas de compte ?
     button.btn.btn-secondary(type='submit') S'inscrire

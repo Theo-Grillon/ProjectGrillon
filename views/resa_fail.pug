@@ -1,11 +1,12 @@
 extends layout
-
+//Page d'échec de réservation
 block content
     p Désolé, les ressources suivantes sont déjà réservées pour la période demandée:
     br
+    //Affichage des ressources déjà utilisées
     each res in res_array
         p - #{res}
         br
-
+    //Pour revenir en arrière
     form.form-inline(method='POST' action='/reservation')
         button.btn.btn-primary(type='submit') Retour

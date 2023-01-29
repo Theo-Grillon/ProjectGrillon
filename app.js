@@ -7,6 +7,7 @@ const session = require("express-session");
 const app = express();
 const port = process.env.PORT;
 
+//router definition
 const userRouter = require(path.join(__dirname, "routes/users.js"));
 const resaRouter = require(path.join(__dirname, "routes/reservations.js"));
 const resRouter = require(path.join(__dirname, "routes/ressources.js"));
@@ -45,8 +46,6 @@ app.get('/', function(req, res) {
 
 });
 
-app.use("/user", userRouter);
-
 app.get('/home', auth, function(req, res) {
     res.render("layout", {title: "Page d'accueil", user : req.session.user});
 });
@@ -57,6 +56,8 @@ app.post('/logout', function(req, res) {
     res.redirect("/user/login");
 });
 
+//Appel des routeurs définis plus haut
+app.use("/user", userRouter);
 app.use("/reservation", resaRouter);
 app.use("/ressource", resRouter);
 

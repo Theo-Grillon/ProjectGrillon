@@ -1,10 +1,17 @@
 extends layout
-
+//Page de confirmation de création de ressource
 block content
+    //affichage des détails
     p Ressource #{name} créée. Elle est de type #{type}.
     br
+    //Pour en créer une nouvelle
     form.form-inline(method='POST' action='/ressource')
         button.btn.btn-primary(type='submit') Créer une autre ressource
     br
+    //Pour effectuer une réservation directement
     form.form-inline(method='POST' action='../reservation')
         button.btn.btn-primary(type='submit') Réservation
+    br
+    //Pour retourner à l'accueil directement
+    form.form-inline(method='POST' action='/home')
+        button.btn.btn-primary(type='submit') Retour à l'accueil

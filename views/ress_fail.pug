@@ -1,7 +1,7 @@
 extends layout
-
+//Page d'échec de création de ressource
 block content
     p Désolé, il semble que la ressource #{name} que vous essayez de créer existe déjà. Essayez de changer de nom.
-
+    //Pour revenir à la création
     form.form-inline(method='POST' action='/ressource')
         button.btn.btn-primary(type='submit') Retour

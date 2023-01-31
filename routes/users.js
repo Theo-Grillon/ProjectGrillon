@@ -13,7 +13,7 @@ router.get('/login', function(req, res) {
 router.post('/login', async function(req, res) {
     //Usr remplit le rôle de check des autres routeurs, il sert à vérifier si l'utilisateur est dans la BDD
     let usr = await users.getByLoginPwd(req.body.login, req.body.password);
-    if (usr!==undefined) { //Si l'utilisateur existe, le connecter et l'envoyer à l'accueil
+    if (usr!==null) { //Si l'utilisateur existe, le connecter et l'envoyer à l'accueil
         req.session.user = {firstname: usr.name, lastname: usr.surname, is_admin: usr.is_admin, login: usr.login};
         res.redirect("/home");
     }
@@ -51,7 +51,7 @@ router.post('/display', async function(req, res){
         if(req.body.is_admin === "false"){ //Si l'administrateur a décidé de retirer les droits
             await users.makeAdmin(req.body.login, false); //Les retirer
         }//Afficher ensuite les utilisateurs avec le pseudo demandé
-        res.render("usr_display", {title: "Résultat de la recherche:", user: req.session.user, usr_array: await users.getByLogin(req.body.login)});
+        res.render("usr_display", {title: "Résultat de la recherche:", user: req.session.user, usr_array: [await users.getByLogin(req.body.login)]});
     }
 })
 
@@ -59,7 +59,7 @@ router.post('/display', async function(req, res){
 router.post('/new', async function(req, res){
     //Vérification de l'existence préalable de l'utilisateur
     let check = await users.getByLogin(req.body.login);
-    if(check !== undefined){ //S'il existe déjà, retour à l'inscription
+    if(check !== null){ //S'il existe déjà, retour à l'inscription
         res.redirect('/user/register');
     }
     else{ //Sinon, envoyer à la page de connexion

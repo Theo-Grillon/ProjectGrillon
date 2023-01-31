@@ -8,19 +8,14 @@ const db = client.db(dbName);
 const usersColl = db.collection('Users');
 
 const User = {
-    getByLoginPwd : async function(log, pass){ // Donne tous les utilisateurs ayant un certain login et mot de passe
+    getByLoginPwd : async function(log, pass){ // Donne l'utilisateur unique ayant le couple login/mot de passe
         await client.connect()
-        return await usersColl.find({login: log, pwd: pass}).toArray();
+        return await usersColl.findOne({login: log, pwd: pass});
     },
 
-    getByLogin: async function(log){ // Donne tous les utilisateurs ayant un login donné
+    getByLogin: async function(log){ // Donne l'utilisateur unique ayant l'identifiant donné
         await client.connect()
-        return await usersColl.find({login: log}).toArray();
-    },
-
-    getByNameSurname: async function(firstname, lastname){ // Donne le premier utilisateur ayant un certain nom et prénom
-        await client.connect();
-        return await usersColl.findOne({name: firstname, surname: lastname});
+        return await usersColl.findOne({login: log});
     },
 
     getAll : async function(){ // Donne tous les utilisateurs

@@ -18,7 +18,6 @@ router.post('/', async function(req, res){
 //Page /reservation/reserved, via la méthode 'post', accédée après remplissage du formulaire de réservation
 router.post('/reserved', async function(req, res){
     //définition des variables utiles
-    let owner = await usr.getByNameSurname(req.session.user.firstname, req.session.user.lastname); //Le propriétaire
     let ressources = []; //les ressources
     let used_res = [];
     let check = [] //La variable check permet de vérifier si la réservation est possible
@@ -41,8 +40,8 @@ router.post('/reserved', async function(req, res){
     let date_end = req.body.end.split('-');
     let day_span = new Date(new Date(date_end[0], date_end[1], date_end[2]).getTime() - new Date(date_start[0], date_start[1], date_start[2]).getTime())
     //Insertion de la réservation dans la BDD
-    await resa.insert(start, end, ressources, owner.login, day_span);
-    await usr.addReservation(owner.login) //Incrémentation du nombre de réservations par l'utilisateur à l'origine
+    await resa.insert(start, end, ressources, req.session.user.login, day_span);
+    await usr.addReservation(req.session.user.login) //Incrémentation du nombre de réservations par l'utilisateur à l'origine
     //Envoi sur la page de confirmation de réservation
     res.render("reservation_conf", {title: "Confirmation de Réservation",user: req.session.user, nb_res: ressources.length, days: (day_span.getUTCDate()-1)});
 })

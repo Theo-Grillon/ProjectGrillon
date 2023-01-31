@@ -17,13 +17,6 @@ block content
                 div.checkbox-inline
                     input.checkbox-input(type='checkbox', name=`res[${index}]`, value=res.name, id=`create-shift-${res}`)
                     label(for=`create-shift-${res}`)=res.name
-        //Champs permettant de renseigner les informations sur l'utilisateur à l'origine de la réservation
-        fieldset
-            legend Owner:
-            label(for='fname') Prenom:
-            input#fname(type='text' name='fname' value=owner.firstname)
-            label(for='lname') Nom:
-            input#lname(type='text' name='lname' value=owner.lastname)
 
         button(class="btn btn-primary" type='submit') Réserver
     br

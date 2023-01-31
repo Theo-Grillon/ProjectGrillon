@@ -37,12 +37,12 @@ router.post('/reserved', async function(req, res){
             } //Sinon rien ne se passe
         }
     }
-    //Insertion de la réservation dans la BDD
-    await resa.insert(start, end, ressources, owner.login);
-    await usr.addReservation(owner.login) //Incrémentation du nombre de réservations par l'utilisateur à l'origine
     let date_start = req.body.start.split('-'); //Ces dates servent à calculer le temps de réservation
     let date_end = req.body.end.split('-');
     let day_span = new Date(new Date(date_end[0], date_end[1], date_end[2]).getTime() - new Date(date_start[0], date_start[1], date_start[2]).getTime())
+    //Insertion de la réservation dans la BDD
+    await resa.insert(start, end, ressources, owner.login, day_span);
+    await usr.addReservation(owner.login) //Incrémentation du nombre de réservations par l'utilisateur à l'origine
     //Envoi sur la page de confirmation de réservation
     res.render("reservation_conf", {title: "Confirmation de Réservation",user: req.session.user, nb_res: ressources.length, days: (day_span.getUTCDate()-1)});
 })

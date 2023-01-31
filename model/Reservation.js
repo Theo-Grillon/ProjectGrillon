@@ -25,15 +25,15 @@ const Reservation = {
         await client.connect();
         return await resaColl.find().toArray();
     },
-
-    insert: async function(start, end, ressources, owner){ // Ajoute une réservation à la BDD
+    insert: async function(start, end, ressources, owner, duration){ // Ajoute une réservation à la BDD
         await client.connect();
         resaColl.insertOne({
             _id: new ObjectID,
             start_date: new Object(start),
             end_date: new Object(end),
             ressources: ressources,
-            owner: owner
+            owner: owner,
+            duration: duration
         })
             .then(
                 res => {

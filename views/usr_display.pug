@@ -1,16 +1,6 @@
 extends layout
-//Page d'affichage et recherche des utilisateurs
+
 block content
-    //Pour chaque utilisateur demandé
-    each usr in usr_array
-        //Afficher leur pseudo, le nombre de réservation et s'ils sont administrateurs
-        p #{usr.login} | Nombre de réservations effectuées: #{usr.nb_resa}
-        if usr.is_admin
-            p Administrateur: Oui
-        else
-            p Administrateur: Non
-        br
-    hr
     //Formulaire de recherche d'utilisateur
     form(method='POST' action='/user/display')
         //Recherche par identifiant
@@ -33,3 +23,15 @@ block content
     //Pour revenir à l'accueil directement
     form.form-inline(method='GET' action='/home')
         button.btn.btn-primary(type='submit') Retour à l'accueil.
+    //Pour chaque utilisateur demandé
+    br
+    h5 #{usr_array.length} résultat(s)
+    each usr in usr_array
+        hr
+        //Afficher leur pseudo, le nombre de réservation et s'ils sont administrateurs
+        p #{usr.login} | Nombre de réservations effectuées: #{usr.nb_resa}
+        if usr.is_admin
+            p Administrateur: Oui
+        else
+            p Administrateur: Non
+        br

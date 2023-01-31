@@ -30,7 +30,7 @@ router.post('/reserved', async function(req, res){
     }
     for (let i = 0; i<check.length; i++){ //Pour chaque réservation utilisant les mêmes ressources
         for (let j = 0; j<check[i].length; j++){
-            if (check[i][j].end_date >= start){ //On vérifie si la date de fin de réservation arrive après la date à laquelle la nouvelle réservation doit commencer
+            if ((check[i][j].start_date<=start && check[i][j].end_date >= start) || (check[i][j].start_date<=end && check[i][j].end_date >= end)){ //On vérifie si la date de fin de réservation arrive après la date à laquelle la nouvelle réservation doit commencer
                 used_res = check[i][j].ressources; //Si c'est le cas, on indique les ressources utilisées par la réservation existante
                 //Avant d'envoyer sur la page d'échec de réservation
                 return res.render("resa_fail", {title: "Echec de la réservation", user: req.session.user, res_array: used_res})
